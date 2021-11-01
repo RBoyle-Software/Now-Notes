@@ -28,7 +28,7 @@ button {
   padding: 0.5em 1.2em;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 16px;
   float: right;
   width: 20%;
