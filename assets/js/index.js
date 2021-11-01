@@ -1,9 +1,17 @@
+
 // poll for new messages every two seconds
-setInterval(() => displayAllMessages(), 2000);
+setInterval(() => loadMessageList(), 2000);
+
+
+function loadMessageList() {
+  console.log('TEST');
+}
+
+
 
 function displayAllMessages () {
   // select the unordered list element
-  const messageList = document.querySelector('#message-list');
+  
   // iterate over all messages in the database
   for (const message of allMessages) {
     // for each message, append list item element to the unordered list element

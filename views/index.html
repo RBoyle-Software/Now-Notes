@@ -6,8 +6,15 @@
     <meta charset="UTF-8">
     <title>Message Board</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
-    <script src="js/index.js"></script>
+    <script type="module" src="js/index.js"></script>
     <link rel="stylesheet" href="css/style.css">
+
+    <script>
+      const load = () => {
+        console.log("load event detected!");
+      }
+      window.onload = load;
+    </script>
 
   </head>
   

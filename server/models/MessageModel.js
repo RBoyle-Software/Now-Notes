@@ -13,7 +13,7 @@ const URI = process.env.MONGO_URI || myURI;
 // const URI = process.env.PG_URI || myURI;
 
 
-const MessageSchema = new Schema ({
+const MessageSchema = new Schema({
   message: {
     type: String,
     required: true
@@ -23,11 +23,11 @@ const MessageSchema = new Schema ({
     required: true
   },
   created_at: {
-    type: String,
-    required: true
+    type: Date,
+    default: Date.now()
   }
 });
 
-const Message = mongoose.model('message', MessageSchema);
+const Message = new mongoose.model('Messages', MessageSchema);
 
-module.exports = Message; // <-- export your model
+module.exports = { Message }; // <-- export your model
