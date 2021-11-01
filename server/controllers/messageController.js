@@ -26,6 +26,7 @@ messageController.postMessage = (req, res, next) => {
   const newMessage = req.body;
   console.log(newMessage);
 
+  // note: response is the newly created message
   Message.create({ ...newMessage }, (err, message) => {
     if (err) {
       return next(err); 
@@ -41,6 +42,7 @@ messageController.deleteMessage = (req, res, next) => {
   console.log('*** Deleting a Message ***');
 
   // TODO: replace hardcoded string with req parameter
+  // query looks like: db.messages.deleteOne( { _id: ObjectId("6161f02737b254f66bd3079f") } );
   const deleteId = '';
 
   Message.deleteOne({ _id: deleteId }, (err, messages) => {
