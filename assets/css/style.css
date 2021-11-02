@@ -16,7 +16,6 @@ body {
 button {
   height: 2em;
   border: none;
-  color: white;
   padding: 0.5em 1.2em;
   text-align: center;
   text-decoration: none;
@@ -73,13 +72,13 @@ li span {
 }
 
 .deleteButtons {
+  height: 2em;
   color: rgb(55, 10, 10);
   background-color: rgb(60, 60, 60);
   font-weight: bold;
   border: solid 3px;
   border-color: rgb(55, 10, 10);
   border-radius: 3px;
-  height: 2em;
   display:flex;
   align-items: center;
   justify-content: center;

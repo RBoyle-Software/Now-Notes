@@ -4,29 +4,34 @@ setTimeout(() => console.log(messageList.childNodes), 500);
 
 
 // poll for new messages every two seconds
-setInterval(() => compareLists(), 300);
-
-const compareLists = () => {
-  console.log(messageList.childNodes.length);
-};
+// setInterval(() => fetchMessages(), 2000);
 
 
 // immediately fetch all messages currently in the database
+function fetchMessages() {
 
-(async function fetchAll() {
-  const response = await fetch('/messages', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  const allMessages = await response.json();
-  console.log('Fetch All', allMessages);
-  
-  allMessages.reverse().forEach((mess) => {
-    appendMessage(mess);
-  });
-})();
+  while (messageList.firstChild) {
+    messageList.removeChild(messageList.firstChild);
+  }
+
+  (async function fetchAll() {
+    const response = await fetch('/messages', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const allMessages = await response.json();
+    console.log('Fetch All', allMessages);
+    
+    allMessages.reverse().forEach((mess) => {
+      appendMessage(mess);
+    });
+  })();
+
+}
+
+fetchMessages();
 
 
 // helper to create and append new list item for each database entry
