@@ -4,7 +4,7 @@ setTimeout(() => console.log(messageList.childNodes), 500);
 
 
 // poll for new messages every two seconds
-setInterval(() => compareLists(), 2000);
+setInterval(() => compareLists(), 300);
 
 const compareLists = () => {
   console.log(messageList.childNodes.length);
@@ -12,7 +12,8 @@ const compareLists = () => {
 
 
 // immediately fetch all messages currently in the database
-(async function fetchAllMessages() {
+
+(async function fetchAll() {
   const response = await fetch('/messages', {
     method: 'GET',
     headers: {
@@ -20,7 +21,7 @@ const compareLists = () => {
     }
   });
   const allMessages = await response.json();
-  console.log(allMessages);
+  console.log('Fetch All', allMessages);
   
   allMessages.reverse().forEach((mess) => {
     appendMessage(mess);
@@ -29,7 +30,7 @@ const compareLists = () => {
 
 
 // helper to create and append new list item for each database entry
-const appendMessage = (msg) => {
+function appendMessage(msg) {
   const newNoteElement = document.createElement('li');
   const textDiv = document.createElement('div');
 
@@ -37,7 +38,7 @@ const appendMessage = (msg) => {
   messTextDiv.classList.add('postedMessages');
   messTextDiv.innerText = msg.message;
   textDiv.append(messTextDiv);
-  
+
   const timeStamp = document.createElement('span');
   timeStamp.classList.add('timeStamps');
   timeStamp.innerText = `Posted: ${msg.created_at}`;
@@ -45,7 +46,7 @@ const appendMessage = (msg) => {
 
   newNoteElement.append(textDiv);
   textDiv.classList.add('textDiv');
-  
+
   const messDeleteButton = document.createElement('button');
   messDeleteButton.classList.add('deleteButtons');
   messDeleteButton.onclick = deleteMessage;
@@ -59,7 +60,7 @@ const appendMessage = (msg) => {
   messDeleteButton.append(messIdDiv);
 
   messageList.append(newNoteElement);
-};
+}
 
 
 // select the Save button and add click listener
