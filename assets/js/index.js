@@ -1,6 +1,6 @@
 // select the unordered list of all messages
 const messageList = document.querySelector('#message-list');
-setTimeout(() => console.log(messageList.childNodes), 500);
+// setTimeout(() => console.log(messageList.childNodes), 500);
 
 
 // poll for new messages every two seconds
@@ -8,11 +8,13 @@ setTimeout(() => console.log(messageList.childNodes), 500);
 
 
 // immediately fetch all messages currently in the database
+fetchMessages();
+
 function fetchMessages() {
 
-  while (messageList.firstChild) {
-    messageList.removeChild(messageList.firstChild);
-  }
+  // while (messageList.firstChild) {
+  //   messageList.removeChild(messageList.firstChild);
+  // }
 
   (async function fetchAll() {
     const response = await fetch('/messages', {
@@ -22,16 +24,13 @@ function fetchMessages() {
       }
     });
     const allMessages = await response.json();
-    console.log('Fetch All', allMessages);
     
     allMessages.reverse().forEach((mess) => {
       appendMessage(mess);
     });
   })();
-
 }
 
-fetchMessages();
 
 
 // helper to create and append new list item for each database entry

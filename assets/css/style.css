@@ -50,6 +50,10 @@ li {
   padding: 25px 20px 40px;
 }
 
+li:hover {
+  border-color: rgb(75, 75, 75);
+}
+
 li span {
   margin-top: 0.5em;
   width: 80%;
