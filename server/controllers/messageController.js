@@ -18,16 +18,14 @@ messageController.getMessages = (req, res, next) => {
 };
 
 
-// post message
+// post new message
 messageController.postMessage = (req, res, next) => {
   console.log('*** Posting a Message ***');
 
-  // TODO: split the body into multiple variables
-  const newMessage = req.body;
-  console.log(newMessage);
-
-  // note: response is the newly created message
-  Message.create({ ...newMessage }, (err, message) => {
+  Message.create( {
+    message: req.body.message,
+    password: req.body.password
+  }, (err, message) => {
     if (err) {
       return next(err); 
     }
@@ -41,18 +39,12 @@ messageController.postMessage = (req, res, next) => {
 messageController.deleteMessage = (req, res, next) => {
   console.log('*** Deleting a Message ***');
 
-  // TODO: replace hardcoded string with req parameter
-  // query looks like: db.messages.deleteOne( { _id: ObjectId("6161f02737b254f66bd3079f") } );
-  const deleteId = '';
-
-  Message.deleteOne({ _id: deleteId }, (err, messages) => {
+  Message.deleteOne({ _id: req.body }, (err, deleted) => {
     if (err) {
-      return next(err); 
-    }   
-      
-    res.locals.deleted = messages;
-    console.log(messages);
-    return next(); 
+      return next(err);
+    }
+    res.locals.deleted = deleted;
+    return next();
   });
 };
 

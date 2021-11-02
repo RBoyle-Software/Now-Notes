@@ -31,20 +31,32 @@ const compareLists = () => {
 // helper to create and append new list item for each database entry
 const appendMessage = (msg) => {
   const newNoteElement = document.createElement('li');
+  const textDiv = document.createElement('div');
 
-  const messTextDiv = document.createElement('div');
+  const messTextDiv = document.createElement('span');
   messTextDiv.classList.add('postedMessages');
   messTextDiv.innerText = msg.message;
-  newNoteElement.append(messTextDiv);
+  textDiv.append(messTextDiv);
+  
+  const timeStamp = document.createElement('span');
+  timeStamp.classList.add('timeStamps');
+  timeStamp.innerText = `Posted: ${msg.created_at}`;
+  textDiv.append(timeStamp);
 
+  newNoteElement.append(textDiv);
+  textDiv.classList.add('textDiv');
+  
   const messDeleteButton = document.createElement('button');
+  messDeleteButton.classList.add('deleteButtons');
+  messDeleteButton.onclick = deleteMessage;
   messDeleteButton.innerText = 'Delete';
   newNoteElement.append(messDeleteButton);
 
   const messIdDiv = document.createElement('div');
+  messIdDiv.classList.add('idNumbers');
   messIdDiv.innerText = msg._id;
   messIdDiv.style.display = 'none';
-  newNoteElement.append(messIdDiv);
+  messDeleteButton.append(messIdDiv);
 
   messageList.append(newNoteElement);
 };
@@ -54,22 +66,19 @@ const appendMessage = (msg) => {
 const saveButton = document.querySelector('#save').addEventListener('click', postNewMessage);
 
 
+
+
 // when the "Save" button is clicked
 function postNewMessage() {
-  console.log('SAVE');
-  const newMessage = this.parentElement;
-  const password = document.querySelector('#pass').value;
   const content = document.querySelector('#desc').value;
-
+  const password = document.querySelector('#pass').value;
   const messBody = {
     'message': content,
     'password': password
   };
 
-  console.log(messBody);
-
   (async function postNew () {
-    const newPost = fetch('/messages', {
+    fetch('/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(messBody),
@@ -82,10 +91,25 @@ function postNewMessage() {
         console.error('Error:', error);
       });
   })();
-
 }
 
-// // when the "Delete" button is clicked
-// function deleteNote() {
-//   // select the note id
-// }
+
+// when the "Delete" button is clicked
+function deleteMessage() {
+  const toDelete = { _id: this.childNodes[1].innerText };
+
+  (async function deletePost() {
+    fetch('/messages', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(toDelete)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  })();
+}
