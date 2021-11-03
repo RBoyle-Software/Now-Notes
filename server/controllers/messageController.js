@@ -5,7 +5,7 @@ const messageController = {};
 
 // get messages
 messageController.getMessages = (req, res, next) => {
-  console.log('*** Retrieving All Messages ***');
+  // console.log('*** Retrieving All Messages ***');
 
   Message.find({}, (err, allMessages) => {
     if (err) {
@@ -39,7 +39,7 @@ messageController.postMessage = (req, res, next) => {
 messageController.deleteMessage = (req, res, next) => {
   console.log('*** Deleting a Message ***');
 
-  Message.deleteOne({ _id: req.body }, (err, deleted) => {
+  Message.deleteOne({ _id: req.params.id }, (err, deleted) => {
     if (err) {
       return next(err);
     }

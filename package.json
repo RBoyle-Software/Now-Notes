@@ -5,14 +5,13 @@
   "main": "server.js",
   "scripts": {
     "merge": "node util/merge.js",
-    "start": "node server/server.js",
-    "dev": "nodemon server/server"
+    "dev": "nodemon server/server.js"
   },
   "author": "Brandon Mizuno",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^7.17.0",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.14"
   },
   "dependencies": {
     "dotenv": "^10.0.0",

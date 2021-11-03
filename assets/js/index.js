@@ -1,20 +1,14 @@
-// select the unordered list of all messages
+// select password default, description default, unordered list of all messages
 const messageList = document.querySelector('#message-list');
-// setTimeout(() => console.log(messageList.childNodes), 500);
+const passwordDefault = document.querySelector('#pass');
+const descriptionDefault = document.querySelector('#desc');
 
-
-// poll for new messages every two seconds
-// setInterval(() => fetchMessages(), 2000);
 
 
 // immediately fetch all messages currently in the database
 fetchMessages();
 
 function fetchMessages() {
-
-  // while (messageList.firstChild) {
-  //   messageList.removeChild(messageList.firstChild);
-  // }
 
   (async function fetchAll() {
     const response = await fetch('/messages', {
@@ -25,17 +19,38 @@ function fetchMessages() {
     });
     const allMessages = await response.json();
     
-    allMessages.reverse().forEach((mess) => {
-      appendMessage(mess);
+    allMessages.forEach((mess) => {
+      prependMessage(mess);
     });
   })();
 }
 
 
+// poll for new messages every two seconds
+setInterval(() => updateMessages(), 300);
+
+function updateMessages() {
+  (async function() {
+    const response = await fetch('/messages', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const allMessages = await response.json();
+    const allDeletes = document.querySelectorAll('.deleteButtons');
+
+    if (allMessages.length > allDeletes.length) {
+      prependMessage(allMessages[allMessages.length - 1]);
+    }
+  })();
+}
+
 
 // helper to create and append new list item for each database entry
-function appendMessage(msg) {
+function prependMessage(msg) {
   const newNoteElement = document.createElement('li');
+  newNoteElement.classList.add('list-item');
   const textDiv = document.createElement('div');
 
   const messTextDiv = document.createElement('span');
@@ -63,14 +78,12 @@ function appendMessage(msg) {
   messIdDiv.style.display = 'none';
   messDeleteButton.append(messIdDiv);
 
-  messageList.append(newNoteElement);
+  messageList.prepend(newNoteElement);
 }
 
 
 // select the Save button and add click listener
 const saveButton = document.querySelector('#save').addEventListener('click', postNewMessage);
-
-
 
 
 // when the "Save" button is clicked
@@ -90,31 +103,39 @@ function postNewMessage() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Success:', data);
+        console.log('Success');
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error');
       });
   })();
+
+  passwordDefault.value = '';
+  descriptionDefault.value = '';
 }
 
 
 // when the "Delete" button is clicked
 function deleteMessage() {
-  const toDelete = { _id: this.childNodes[1].innerText };
+  const toDelete = this.childNodes[1].innerText;
 
   (async function deletePost() {
-    fetch('/messages', {
+    fetch(`/messages/${toDelete}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(toDelete)
     })
-      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        response.json();
+      })
       .then(data => {
-        console.log('Success:', data);
+        console.log('Success');
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error');
       });
   })();
+
+  const deleteEntry = this.parentNode;
+  messageList.removeChild(deleteEntry);
 }

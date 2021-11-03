@@ -35,8 +35,14 @@ app.post('/messages', messageController.postMessage, (req, res, next) => {
 });
 
 
-app.delete('/messages', messageController.deleteMessage, (req, res, next) => {
+app.delete('/messages/:id', messageController.deleteMessage, (req, res, next) => {
   res.status(200).json(res.locals.deleted);
+});
+
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 
