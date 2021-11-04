@@ -1,16 +1,13 @@
 const express = require('express');
-const path = require('path');
 const app = express();
-const router = express.Router();
+const path = require('path');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-
-const messageController = require('../server/controllers/messageController');
 require('dotenv').config();
-
-
 const PORT = process.env.PORT;
 
+const messageController = require('../server/controllers/messageController');
+const authController = require('../server/controllers/authController');
 
 mongoose.connect(
   process.env.MONGO_URI,
@@ -25,6 +22,7 @@ mongoose.connection.once('open', () => {
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../views')));
 app.use(express.static(path.join(__dirname, '../assets')));
+app.use(cookieParser());
 
 
 app.get('/messages', messageController.getMessages, (req, res, next) => {
@@ -32,8 +30,14 @@ app.get('/messages', messageController.getMessages, (req, res, next) => {
 });
 
 
-app.post('/messages', messageController.postMessage, (req, res, next) => {
+app.post('/messages', authController.checkCookie, (req, res, next) => {
+  res.cookie('cookieName', '00001', { expires: new Date(Date.now() + 900000), httpOnly: true });
+  next();
+});
+
+app.post('/messages',messageController.postMessage, (req, res, next) => {
   res.status(200).json(res.locals.new);
+  next();
 });
 
 

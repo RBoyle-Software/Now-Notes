@@ -1,20 +1,16 @@
-
 const { Message } = require('../models/MessageModel');
-
+const cookieParser = require('cookie-parser');
 
 const authController = {};
 
 
-authController.setCookie = (req, res, next) => {
+authController.checkCookie = (req, res, next) => {
 
-  Message.find({}, (err, allMessages) => {
-    if (err) {
-      return next(err); 
-    }
+  console.log('Checking Cookie');
+  console.log(req.cookies);
+  console.log(cookieParser);
 
-    res.locals.messages = allMessages;
-    return next(); 
-  });
+  return next();
 };
 
 
