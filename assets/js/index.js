@@ -1,11 +1,16 @@
 // select password default, description default, unordered list of all messages
 const messageList = document.querySelector('#message-list');
 const passwordDefault = document.querySelector('#pass');
-const descriptionDefault = document.querySelector('#desc');
+const descDefault = document.querySelector('#desc');
+const container = document.getElementById('container');
+
+setTimeout((() => {
+  container.style.opacity = 1;
+}), 300);
 
 
 
-// immediately fetch all messages currently in the database
+// immediately fetch and display all messages currently in the database
 fetchMessages();
 
 function fetchMessages() {
@@ -84,6 +89,11 @@ function prependMessage(msg) {
 
 // select the Save button and add click listener
 const saveButton = document.querySelector('#save').addEventListener('click', postNewMessage);
+descDefault.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    postNewMessage();
+  }
+});
 
 
 // when the "Save" button is clicked
@@ -102,8 +112,8 @@ function postNewMessage() {
       body: JSON.stringify(messBody),
     })
       .then(response => response.json())
-      .then(data => {
-        console.log('Success');
+      .then((data) => {
+        console.log('Posted a Message');
       })
       .catch((error) => {
         console.error('Error');
@@ -111,7 +121,7 @@ function postNewMessage() {
   })();
 
   passwordDefault.value = '';
-  descriptionDefault.value = '';
+  descDefault.value = '';
 }
 
 
@@ -125,11 +135,10 @@ function deleteMessage() {
       headers: { 'Content-Type': 'application/json' },
     })
       .then(response => {
-        console.log(response);
         response.json();
       })
       .then(data => {
-        console.log('Success');
+        console.log('Deleted a Message');
       })
       .catch((error) => {
         console.error('Error');

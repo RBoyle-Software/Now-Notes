@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const router = express.Router();
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 const messageController = require('../server/controllers/messageController');
 require('dotenv').config();
@@ -19,6 +20,7 @@ mongoose.connect(
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
+
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../views')));

@@ -10,7 +10,7 @@ h1 {
 }
 
 body {
-  background-image: linear-gradient(to bottom right, rgb(17, 28, 39), rgb(0, 0, 0), rgb(17, 28, 39));
+  background-image: linear-gradient(to bottom right, rgb(23, 38, 53), rgb(15, 15, 15), rgb(43, 19, 43));
 }
 
 button {
@@ -27,7 +27,7 @@ button {
 input, textarea {
   padding: 8px;
   background-color: rgb(80, 80, 80);
-  border: solid 2px rgb(50, 100, 150);
+  border: solid 1.5px rgb(50, 100, 150);
   border-radius: 3px;
 }
 
@@ -37,10 +37,10 @@ ul {
 }
 
 li {
-  background-color: rgb(60, 60, 60);
+  background-color: rgb(90, 90, 90);
   list-style: none;
-  border: 3px solid rgb(20, 20, 20);
-  border-radius: 5px;
+  border: 1px solid rgb(50, 100, 150);
+  border-radius: 2px;
   width: 100%;
   min-height: 4em;
   clear: both;
@@ -48,10 +48,6 @@ li {
   line-height: 1.5em!important;
   margin: 5px auto;
   padding: 25px 20px 40px;
-}
-
-li:hover {
-  border-color: rgb(75, 75, 75);
 }
 
 li span {
@@ -64,7 +60,7 @@ li span {
 }
 
 .postedMessages {
-  color: rgb(130, 130, 130);
+  color: rgb(165, 165, 165);
   font-weight: bold;
   flex-grow: 6;
 }
@@ -77,25 +73,26 @@ li span {
 
 .deleteButtons {
   height: 2em;
-  color: rgb(55, 10, 10);
-  background-color: rgb(55, 55, 55);
+  color: rgb(100, 20, 20);
+  background-color: rgb(80, 80, 80);
   font-weight: bold;
   border: solid 3px;
-  border-color: rgb(55, 10, 10);
   border-radius: 3px;
+  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.521);
   display:flex;
   align-items: center;
   justify-content: center;
+  transition-duration: 300ms;
 }
 
 .deleteButtons:hover {
-  color: rgb(95, 10, 10);
-  border-color: rgb(95, 10, 10);
-  background-color: rgb(90, 90, 90);
+  color: rgb(128, 18, 18);
+  background-color: rgb(92, 92, 92);
+  box-shadow: 0px 3px 10px rgb(63, 17, 17);
 }
 
 .timeStamps {
-  color: rgb(50, 100, 150);
+  color: rgb(22, 59, 95);
   font-size: 0.8em;
 }
 
@@ -104,6 +101,8 @@ li span {
   margin: 2em auto;
   width: 800px;
   max-width: 80%;
+  opacity: 0;
+  transition-duration: 1000ms;
 }
 
 #save {
@@ -115,12 +114,14 @@ li span {
   background-color: rgb(30, 55, 80);
   border: 2px solid rgb(90, 90, 90);
   border-radius: 3px;
+  transition-duration: 300ms;
 }
 
 #save:hover {
   background-color: rgb(40, 90, 140);
   color:rgb(150, 150, 150);
   border-color: rgb(150, 150, 150);
+  box-shadow: 0px 3px 10px rgba(40, 90, 140, 0.616);
 }
 
 #desc {
