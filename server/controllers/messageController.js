@@ -50,5 +50,11 @@ messageController.deleteMessage = (req, res, next) => {
   });
 };
 
+// need to get the value at pass from the existing cookie
+// get the object id from the button clicked
+// find the object in the db and check the password
+// compare the cookie pass to the object password
+// if they match, do the delete operation and delete the element
+// if they do not match, alert
 
 module.exports = messageController;

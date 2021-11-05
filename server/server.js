@@ -38,7 +38,7 @@ app.post('/messages', messageController.postMessage, (req, res, next) => {
 
 
 
-app.delete('/messages/:id', messageController.deleteMessage, (req, res, next) => {
+app.delete('/messages/:id', authController.checkCookie, messageController.deleteMessage, (req, res, next) => {
   res.status(200).json(res.locals.deleted);
 });
 

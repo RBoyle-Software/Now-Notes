@@ -2,52 +2,51 @@
 const messageList = document.querySelector('#message-list');
 const passwordDefault = document.querySelector('#pass');
 const descDefault = document.querySelector('#desc');
-const container = document.getElementById('container');
 
+// select container element and automate opacity
+const container = document.getElementById('container');
 setTimeout((() => {
   container.style.opacity = 1;
 }), 300);
 
 
-
 // immediately fetch and display all messages currently in the database
 fetchMessages();
 
-function fetchMessages() {
-  (async function fetchAll() {
-    const response = await fetch('/messages', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const allMessages = await response.json();
-    
-    allMessages.forEach((mess) => {
-      prependMessage(mess);
-    });
-  })();
+async function fetchMessages() {
+  const response = await fetch('/messages', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const allMessages = await response.json();
+  console.log('Fetching All Messages');
+
+  allMessages.forEach((mess) => {
+    prependMessage(mess);
+  });
 }
 
 
 // poll for new messages every two seconds
 setInterval(() => updateMessages(), 300);
 
-function updateMessages() {
-  (async function() {
-    const response = await fetch('/messages', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const allMessages = await response.json();
-    const allDeletes = document.querySelectorAll('.deleteButtons');
-
-    if (allMessages.length > allDeletes.length) {
-      prependMessage(allMessages[allMessages.length - 1]);
+async function updateMessages() {
+  const response = await fetch('/messages', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
     }
-  })();
+  });
+  
+  const allMessages = await response.json();
+  const allDeletes = document.querySelectorAll('.deleteButtons');
+
+  if (allMessages.length > allDeletes.length) {
+    prependMessage(allMessages[allMessages.length - 1]);
+  }
 }
 
 
@@ -95,7 +94,7 @@ descDefault.addEventListener('keypress', function(e) {
 });
 
 
-// when the "Save" button is clicked
+// when the Save button is clicked
 function postNewMessage() {
   const content = document.querySelector('#desc').value;
   const password = document.querySelector('#pass').value;
@@ -109,6 +108,10 @@ function postNewMessage() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(messBody),
   })
+    .then(response => {
+      response.json();
+      console.log('Saved a Message');
+    })
     .catch((error) => {
       console.error('Error:', error);
     });
@@ -118,7 +121,7 @@ function postNewMessage() {
 }
 
 
-// when the "Delete" button is clicked
+// when the Delete button is clicked
 function deleteMessage() {
   const toDelete = this.childNodes[1].innerText;
 
@@ -129,12 +132,10 @@ function deleteMessage() {
     })
       .then(response => {
         response.json();
-      })
-      .then(data => {
         console.log('Deleted a Message');
       })
       .catch((error) => {
-        console.error('Error');
+        console.error('Error', error);
       });
   })();
 
