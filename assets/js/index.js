@@ -14,7 +14,6 @@ setTimeout((() => {
 fetchMessages();
 
 function fetchMessages() {
-
   (async function fetchAll() {
     const response = await fetch('/messages', {
       method: 'GET',
@@ -105,20 +104,14 @@ function postNewMessage() {
     'password': password
   };
 
-  (async function postNew () {
-    fetch('/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(messBody),
-    })
-      .then(response => response.json())
-      .then((data) => {
-        console.log('Posted a Message');
-      })
-      .catch((error) => {
-        console.error('Error');
-      });
-  })();
+  fetch('/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(messBody),
+  })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 
   passwordDefault.value = '';
   descDefault.value = '';

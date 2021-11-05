@@ -10,7 +10,7 @@ h1 {
 }
 
 body {
-  background-image: linear-gradient(to bottom right, rgb(23, 38, 53), rgb(15, 15, 15), rgb(43, 19, 43));
+  background: linear-gradient(to bottom right, rgb(32, 54, 77), rgb(15, 15, 15), rgb(65, 27, 65));
 }
 
 button {

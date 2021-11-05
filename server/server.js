@@ -25,25 +25,23 @@ app.use(express.static(path.join(__dirname, '../assets')));
 app.use(cookieParser());
 
 
+
 app.get('/messages', messageController.getMessages, (req, res, next) => {
   res.status(200).json(res.locals.messages);
 });
 
 
-app.post('/messages', authController.checkCookie, (req, res, next) => {
-  res.cookie('cookieName', '00001', { expires: new Date(Date.now() + 900000), httpOnly: true });
-  next();
+
+app.post('/messages', messageController.postMessage, (req, res, next) => {
+  res.status(200).json(res.locals.new);
 });
 
-app.post('/messages',messageController.postMessage, (req, res, next) => {
-  res.status(200).json(res.locals.new);
-  next();
-});
 
 
 app.delete('/messages/:id', messageController.deleteMessage, (req, res, next) => {
   res.status(200).json(res.locals.deleted);
 });
+
 
 
 app.use(function (err, req, res, next) {

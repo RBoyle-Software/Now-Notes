@@ -22,7 +22,9 @@ messageController.getMessages = (req, res, next) => {
 messageController.postMessage = (req, res, next) => {
   console.log('*** Posting a Message ***');
 
-  Message.create( {
+  res.cookie('pass', req.body.password);
+
+  Message.create({
     message: req.body.message,
     password: req.body.password
   }, (err, message) => {
