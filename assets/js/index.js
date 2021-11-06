@@ -123,10 +123,10 @@ function postNewMessage() {
 
 // when the Delete button is clicked
 function deleteMessage() {
-  const toDelete = this.childNodes[1].innerText;
+  const idToDelete = this.childNodes[1].innerText;
 
   (async function deletePost() {
-    fetch(`/messages/${toDelete}`, {
+    fetch(`/messages/${idToDelete}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })

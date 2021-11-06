@@ -36,6 +36,7 @@ messageController.postMessage = (req, res, next) => {
   });
 };
 
+// console.log(req.cookies);
 
 // delete message
 messageController.deleteMessage = (req, res, next) => {
@@ -46,6 +47,7 @@ messageController.deleteMessage = (req, res, next) => {
       return next(err);
     }
     res.locals.deleted = deleted;
+    
     return next();
   });
 };
