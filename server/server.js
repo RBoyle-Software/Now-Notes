@@ -20,31 +20,37 @@ mongoose.connection.once('open', () => {
 
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../views')));
 app.use(express.static(path.join(__dirname, '../assets')));
-app.use(cookieParser());
 
 
 
-app.get('/messages', messageController.getMessages, (req, res, next) => {
-  res.status(200).json(res.locals.messages);
-});
+app.get('/messages',
+  messageController.getMessages,
+  (req, res, next) => {
+    res.status(200).json(res.locals.messages);
+  });
 
 
 
-app.post('/messages', messageController.postMessage, (req, res, next) => {
-  res.status(200).json(res.locals.new);
-});
+app.post('/messages',
+  messageController.postMessage,
+  (req, res, next) => {
+    res.status(200).json(res.locals.new);
+  });
 
 
 
-app.delete('/messages/:id', authController.checkCookie, messageController.deleteMessage, (req, res, next) => {
-  res.status(200).json(res.locals.deleted);
-});
+app.delete('/messages/:id',
+  authController.checkCookie,
+  messageController.deleteMessage, (req, res, next) => {
+    res.status(200).json(res.locals.deleted);
+  });
 
 
 
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });

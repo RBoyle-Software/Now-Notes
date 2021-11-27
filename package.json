@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "merge": "node util/merge.js",
-    "dev": "nodemon server/server.js"
+    "dev": "nodemon server/server.js",
+    "debug": "DEBUG=express:* nodemon server/server.js"
   },
   "author": "Brandon Mizuno",
   "license": "ISC",
@@ -19,6 +20,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongo": "^0.1.0",
-    "mongoose": "^6.0.10"
+    "mongodb": "^4.1.4",
+    "mongoose": "^6.0.10",
+    "mongosh": "^1.1.2"
   }
 }
