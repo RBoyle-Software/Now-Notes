@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: rgb(50, 100, 150);
+}
+
+body {
+  background: linear-gradient(to bottom right, rgb(32, 54, 77), rgb(15, 15, 15), rgb(65, 27, 65));
+}
+
+button {
+  height: 2em;
+  border: none;
+  padding: 0.5em 1.2em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  float: right;
+  width: 18%;
+}
+
+input, textarea {
+  padding: 8px;
+  background-color: rgb(80, 80, 80);
+  border: solid 1.5px rgb(50, 100, 150);
+  border-radius: 3px;
+}
+
+ul {
+  position: relative;
+  margin-top: 2em;
+}
+
+li {
+  background-color: rgb(90, 90, 90);
+  list-style: none;
+  border: 1px solid rgb(50, 100, 150);
+  border-radius: 2px;
+  width: 100%;
+  min-height: 4em;
+  clear: both;
+  font-size: 15px;
+  line-height: 1.5em!important;
+  margin: 5px auto;
+  padding: 25px 20px 40px;
+}
+
+li span {
+  margin-top: 0.5em;
+  width: 80%;
+}
+
+.row input {
+  width: 80%;
+}
+
+.postedMessages {
+  color: rgb(165, 165, 165);
+  font-weight: bold;
+  flex-grow: 6;
+}
+
+.textDiv {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 4;
+}
+
+.deleteButtons {
+  height: 2em;
+  color: rgb(100, 20, 20);
+  background-color: rgb(80, 80, 80);
+  font-weight: bold;
+  border: solid 3px;
+  border-radius: 3px;
+  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.521);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: 300ms;
+}
+
+.deleteButtons:hover {
+  color: rgb(128, 18, 18);
+  background-color: rgb(92, 92, 92);
+  box-shadow: 0px 3px 10px rgb(63, 17, 17);
+}
+
+.timeStamps {
+  color: rgb(22, 59, 95);
+  font-size: 0.8em;
+}
+
+#container {
+  position: relative;
+  margin: 2em auto;
+  width: 800px;
+  max-width: 80%;
+  opacity: 0;
+  transition-duration: 1000ms;
+}
+
+#save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:rgb(90, 90, 90);
+  font-weight: bold;
+  background-color: rgb(30, 55, 80);
+  border: 2px solid rgb(90, 90, 90);
+  border-radius: 3px;
+  transition-duration: 300ms;
+}
+
+#save:hover {
+  background-color: rgb(40, 90, 140);
+  color:rgb(150, 150, 150);
+  border-color: rgb(150, 150, 150);
+  box-shadow: 0px 3px 10px rgba(40, 90, 140, 0.616);
+}
+
+#desc {
+  list-style: none;
+  width: 100%;
+  min-height: 4em;
+  clear: both;
+  font-size: 15px;
+  line-height: 1.5em!important;
+  margin: 5px auto;
+  padding: 25px 20px 40px;
+}
