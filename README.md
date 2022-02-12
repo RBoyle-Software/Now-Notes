@@ -7,6 +7,7 @@ A browser-based personal memo / to-do list application.
 - add a login page
 - improve color pallet contrast
 - display only authorized user's posts
+- deploy on Vercel
 - search posts by title
 - search posts by content
 - search posts by date
