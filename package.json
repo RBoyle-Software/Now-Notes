@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "merge": "node util/merge.js",
+    "start": "node server/server.js",
     "dev": "nodemon server/server.js",
     "debug": "DEBUG=express:* nodemon server/server.js"
   },
