@@ -63,7 +63,7 @@ function prependMessage(msg) {
 
   const timeStamp = document.createElement('span');
   timeStamp.classList.add('timeStamps');
-  timeStamp.innerText = `Posted: ${msg.created_at}`;
+  timeStamp.innerText = `Posted: ${msg.display_date}`;
   textDiv.append(timeStamp);
 
   newNoteElement.append(textDiv);
