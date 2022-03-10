@@ -1,17 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const { format } = require('date-fns');
 const Schema = mongoose.Schema;
 
-// v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-// const myURI = '';
-
-// UNCOMMENT THE LINE BELOW IF USING MONGO
-const URI = process.env.MONGO_URI;
-
-// UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
-// const URI = process.env.PG_URI || myURI;
-
+// console.log(format(new Date(), 'EEE, MMMM dd yyyy') + ' at ' + format(new Date(), 'ppp'));
 
 const MessageSchema = new Schema({
   message: {
@@ -25,9 +18,14 @@ const MessageSchema = new Schema({
   created_at: {
     type: Date,
     default: Date.now()
+  },
+  display_date: {
+    type: String,
+    default: format(new Date(), 'EEE, MMMM do yyyy') + ' at ' + format(new Date(), 'ppp')
   }
 });
 
+
 const Message = new mongoose.model('Messages', MessageSchema);
 
-module.exports = { Message }; // <-- export your model
+module.exports = { Message };
