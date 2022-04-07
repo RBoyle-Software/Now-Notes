@@ -20,5 +20,3 @@ A browser-based personal memo / to-do list application.
 - update folder structure
 - add color labels and search/sort by color
 - move Save button inside the compose note area
-
-
